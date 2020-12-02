@@ -8,7 +8,9 @@
         "domainConfigurationType": {
             "value": "FullySynced"
         },
-        "domainName": {},
+        "domainName": {
+            "value": ""
+        },
         "filteredSync": {
             "value": "Disabled"
         },
