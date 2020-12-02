@@ -1,5 +1,5 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "apiVersion": {
@@ -50,6 +50,28 @@
         "nsgName": {
             "type": "string",
             "defaultValue": "aadds-nsg"
+        },
+        "workspaceName": {
+            "type": "string",
+            "defaultValue": "wvd-auto"
+        },
+        "workspaceDescription": {
+            "defaultValue": "Windows 10 deployment for demo",
+            "type": "string"
+        },
+        "friendlyName": {
+            "defaultValue": "Windows 10 deployment demo",
+            "type": "string"
+        },
+        "appGroups": {
+            "defaultValue": [
+            ],
+            "type": "array"
+        },
+        "tags": {
+            "defaultValue": {
+            },
+            "type": "object"
         }
     },
     "resources": [
@@ -142,7 +164,33 @@
                     }
                 ]
             }
-        }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "nestedTemplate1",
+            "properties": {
+              "mode": "Incremental",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "resources": [
+                    {
+                        "type": "Microsoft.DesktopVirtualization/workspaces",
+                        "apiVersion": "[parameters('apiVersion')]",
+                        "name": "[parameters('workspaceName')]",
+                        "location": "[parameters('location')]",
+                        "tags": "[parameters('tags')]",
+                        "properties": {
+                            "friendlyName": "[parameters('friendlyName')]",
+                            "description": "[parameters('workspaceDescription')]",
+                            "applicationGroupReferences": "[parameters('appGroups')]"
+                        }
+                    }
+                ]
+              }
+            }
+          }
     ],
     "outputs": {}
 }
