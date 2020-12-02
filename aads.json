@@ -3,7 +3,8 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "apiVersion": {
-            "value": "2017-06-01"
+            "type": "string",
+            "defaultValue": "2017-06-01"
         },
         "domainConfigurationType": {
             "type": "string",
@@ -30,11 +31,11 @@
         },
         "subnetName": {
             "type": "string",
-            "value": "aadds-subnet"
+            "defaultValue": "aadds-subnet"
         },
         "vnetName": {
             "type": "string",
-            "value": "aadds-vnet"
+            "defaultValue": "aadds-vnet"
         },
         "vnetAddressPrefixes": {
             "type": "array",
