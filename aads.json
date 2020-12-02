@@ -6,46 +6,55 @@
             "value": "2017-06-01"
         },
         "domainConfigurationType": {
-            "value": "FullySynced"
+            "type": "string",
+            "defaultValue": "FullySynced"
         },
         "domainName": {
-            "value": ""
+            "type": "string"
         },
         "filteredSync": {
-            "value": "Disabled"
+            "type": "string",
+            "defaultValue": "Disabled"
         },
         "location": {
-            "value": "westus"
+            "type": "string",
+            "defaultValue": "westus"
         },
         "notificationSettings": {
-            "value": {
+            "type": "object",
+            "defaultValue": {
                 "notifyGlobalAdmins": "Enabled",
                 "notifyDcAdmins": "Enabled",
                 "additionalRecipients": []
             }
         },
         "subnetName": {
+            "type": "string",
             "value": "aadds-subnet"
         },
         "vnetName": {
+            "type": "string",
             "value": "aadds-vnet"
         },
         "vnetAddressPrefixes": {
-            "value": [
+            "type": "array",
+            "defaultValue": [
                 "10.10.0.0/24"
             ]
         },
         "subnetAddressPrefix": {
-            "value": "10.10.0.0/25"
+            "type": "string",
+            "defaultValue": "10.10.0.0/25"
         },
         "nsgName": {
-            "value": "aadds-nsg"
+            "type": "string",
+            "defaultValue": "aadds-nsg"
         }
     },
     "resources": [
         {
             "apiVersion": "2017-06-01",
-            "type": "Microsoft.AAD/DomainServices",
+            "type": "Microsoft.AAD/domainServices",
             "name": "[parameters('domainName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
@@ -60,7 +69,7 @@
             }
         },
         {
-            "type": "Microsoft.Network/NetworkSecurityGroups",
+            "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[parameters('nsgName')]",
             "location": "[parameters('location')]",
             "properties": {
